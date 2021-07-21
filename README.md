@@ -5,17 +5,33 @@
 ​                                                                                                                                                             ——[Sherry Liang](mailto:cssherryliang@gmail.com)
 
 
-## Overleaf链接
+## 用法1：Overleaf在线编辑
 
-https://www.overleaf.com/project/60f7f4bd72ab976ab44eedd7
+Overleaf链接：https://www.overleaf.com/project/60f7f4bd72ab976ab44eedd7
 
-### 设置
+点击menu，然后点击Copy Project将该项目变成自己的项目，就可以编辑啦~
+
+#### 如何设置menu的setting栏目
 
 * Compiler: XeLatex
 * Tex Live Version: 2020
 * Main Document: main.tex
 
-## 用法
+## 用法2：TexStudio本地编辑
+
+用TeXstudio打开main.tex，使用XeLaTeX进行编译
+
+#### 如何设置XeLaTeX编译
+
+1. 点击 选项→设置 TeXstudio，则进入了TeXstudio的设置页面
+
+2. 选择 构建→默认编译器→XeLaTeX，点击确认
+
+## 用法3：VSCode本地编辑
+
+使用VSCode编辑tex文件，用[`make`](https://cmake.org/install/)生成pdf文件。
+
+#### 如何使用`make`
 
 通过命令行工具（如cmd，bash）进入项目所在目录：
 
@@ -23,7 +39,6 @@ https://www.overleaf.com/project/60f7f4bd72ab976ab44eedd7
 make [{all|thesis|spine|doc|clean|cleanall|distclean}]
 ```
 
-### 目标
 
 * `make thesis`    生成论文 main.pdf；
 * `make spine`     生成书脊 spine.pdf；
