@@ -1,0 +1,632 @@
+% !TeX root = ./main.tex
+
+% 论文基本信息配置
+
+\thusetup{
+  %******************************
+  % 注意：
+  %   1. 配置里面不要出现空行
+  %   2. 不需要的配置信息可以删除
+  %   3. 建议先阅读文档中所有关于选项的说明
+  %******************************
+  %
+  % 输出格式
+  %   选择打印版（print）或用于提交的电子版（electronic），前者会插入空白页以便直接双面打印
+  %
+  output = electronic,
+  %
+  % 标题
+  %   可使用“\\”命令手动控制换行
+  %
+  title  = {低光照条件下的图像增强和识别\\关键技术研究},
+  title* = {Research on Key Technologies of Image  Enhancement  and Recognition in Low-Light Conditions},
+  % 
+  institute = {华南理工大学},
+  institute* = {South China University of Technology},
+  %
+  % 学位
+  %   1. 学术型
+  %      - 中文
+  %        需注明所属的学科门类，例如：
+  %        哲学、经济学、法学、教育学、文学、历史学、理学、工学、农学、医学、
+  %        军事学、管理学、艺术学
+  %      - 英文
+  %        博士：Doctor of Philosophy
+  %        硕士：
+  %          哲学、文学、历史学、法学、教育学、艺术学门类，公共管理学科
+  %          填写“Master of Arts“，其它填写“Master of Science”
+  %   2. 专业型
+  %      直接填写专业学位的名称，例如：
+  %      教育博士、工程硕士等
+  %      Doctor of Education, Master of Engineering
+  %   3. 本科生不需要填写
+  %
+  degree-name  = {工学博士},
+  degree-name* = {Doctor of Philosophy},
+  %
+  % 培养单位
+  %   填写所属院系的全名
+  %
+  department = {计算机科学与工程学院},
+  %
+  % 学科
+  %   1. 学术型学位
+  %      获得一级学科授权的学科填写一级学科名称，其他填写二级学科名称
+  %   2. 工程硕士
+  %      工程领域名称
+  %   3. 其他专业型学位
+  %      不填写此项
+  %   4. 本科生填写专业名称，第二学位论文需标注“（第二学位）”
+  %
+  discipline  = {计算机科学与技术},
+  discipline* = {Computer Science and Technology},
+  %
+  % 姓名
+  %
+  author  = {梁锦秀},
+  author* = {Liang Jinxiu},
+  %
+  % 指导教师
+  %   中文姓名和职称之间以英文逗号“,”分开，下同
+  %
+  supervisor  = {许勇, 教授},
+  supervisor* = {Professor Xu Yong},
+  %
+  % 副指导教师
+  %
+  %associate-supervisor  = {陈文光, 教授},
+  %associate-supervisor* = {Professor Chen Wenguang},
+  %
+  % 联合指导教师
+  %
+  % co-supervisor  = {某某某, 教授},
+  % co-supervisor* = {Professor Mou Moumou},
+  %
+  % 日期
+  %   使用 ISO 格式；默认为当前时间
+  %
+   date = {2021-04-12},
+  %
+  % 是否在中文封面后的空白页生成书脊（默认 false）
+  %
+  include-spine = false,  
+  %   
+  % 是否使用pdf封面（默认 \@empty
+  %
+  include-cover = true,
+  % cover-file = {figures/cover.pdf},
+  %
+  % 密级和年限
+  %   秘密, 机密, 绝密
+  %
+  % secret-level = {秘密},
+  % secret-year  = {10},
+  %
+  % 博士后专有部分
+  %
+  % clc                = {分类号},
+  % udc                = {UDC},
+  % id                 = {编号},
+  % discipline-level-1 = {计算机科学与技术},  % 流动站（一级学科）名称
+  % discipline-level-2 = {系统结构},          % 专业（二级学科）名称
+  % start-date         = {2011-07-01},        % 研究工作起始时间
+  toc-chapter-style = times,
+  number-separator = {-},
+  student-id = {xxxxxxx},
+}
+
+%---------------------------------------------------------------------------%
+%->> Load packages 载入所需的宏包
+%---------------------------------------------------------------------------%
+
+% 定理类环境宏包
+\usepackage{amsthm}
+% 也可以使用 ntheorem
+% \usepackage[amsmath,thmmarks,hyperref]{ntheorem}
+
+\thusetup{
+  %
+  % 数学字体
+  math-style = GB,  % GB | ISO | TeX
+  math-font  = xits,  % sitx | xits | libertinus
+}
+
+% 可以使用 nomencl 生成符号和缩略语说明
+% \usepackage{nomencl}
+% \makenomenclature
+
+% 表格加脚注
+\usepackage{threeparttable}
+
+% 表格中支持跨行
+\usepackage{multirow}
+
+% 固定宽度的表格。
+% \usepackage{tabularx}
+
+% 跨页表格
+\usepackage{longtable}
+
+% The package allows rows and columns to be coloured, and even individual cells.
+\usepackage{colortbl}
+
+% 量和单位
+\usepackage{siunitx}
+
+% 参考文献使用 BibTeX + natbib 宏包
+% 顺序编码制
+\usepackage[sort]{natbib}
+\bibliographystyle{thuthesis-numeric}
+
+% 参考文献中使用\citet{}时的引用方式
+% \def\bibetal{等}
+% \def\biband{和}
+
+% Draw graphics directly with TeX commands
+\usepackage{tikz}
+\usepackage{pgfplots}% Create normal/logarithmic plots in two and three dimensions.
+% \pgfplotsset{compat=1.17}
+\usetikzlibrary{% load libraries
+    positioning,
+    arrows,
+    calc,
+    trees,
+    spy
+}%
+
+% The package subfigure is now considered obsolete: it was superseded by subfig, but users may find the more recent subcaption package more satisfactory.
+%\usepackage{subfigure}
+%\usepackage{subfig}
+
+
+% Draw dash-lines in array/tabular. 
+\usepackage{arydshln}
+
+% Marking things to do in a LaTeX document.
+\usepackage[backgroundcolor=yellow]{todonotes}
+
+% allow the placement of graphics relative to the “current position” using additional optional arguments of \includegraphics.
+\usepackage{graphbox}
+\usepackage{adjustbox}
+
+%  provides an easy-to-use interface to the bbding symbol set
+\usepackage{bbding}
+
+% create algorithms
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+% hyperref 宏包在最后调用
+\usepackage{hyperref}
+
+
+%---------------------------------------------------------------------------%
+%->> Configuration command
+%---------------------------------------------------------------------------%
+
+%-> Extensions and directories for graphics
+% 定义所有的图片文件在 figures 子目录下
+\graphicspath{{figures/}}
+
+%- Declare graphic extensions for automatic selection when including graphics
+%- via avoiding supplying graphic extensions in \includegraphics command,
+%- the source file can be more general and adaptive
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps,.tif,.bmp,.gif}%
+
+% 数学命令
+\makeatletter
+\newcommand\dif{%  % 微分符号
+  \mathop{}\!%
+  \ifthu@math@style@TeX
+    d%
+  \else
+    \mathrm{d}%
+  \fi
+}
+\makeatother
+
+% alignment in table
+\renewcommand{\bfseries}{\fontseries{b}\selectfont}
+\robustify\bfseries
+\newrobustcmd{\BF}{\bfseries}
+
+%-> Layout, space, and style
+%\linespread{1.5}% 1.5 for "one and a half" line spacing, and 2.0 for "double" line spacing
+%\setlength{\parskip}{0.5ex plus 0.25ex minus 0.25ex}% skip space a paragraph
+% \setcounter{secnumdepth}{4}% depth for section numbering, default is 2(subsub)
+% \setcounter{tocdepth}{2}% depth for the table of contents
+
+\newcommand{\hiddensubsection}[1]{
+	\stepcounter{subsection}
+	\subsection*{{\rmfamily \arabic{chapter}.\arabic{section}.\arabic{subsection}}\hspace{1em}{#1}}
+}
+
+%---------------------------------------------------------------------------%
+%->> User defined commands
+%---------------------------------------------------------------------------%
+
+%%Word abbreviations
+% \newcommand{\st}{\text{s.t.}\ \ }
+\newcommand\eg{\emph{e.g}~} 
+\newcommand\Eg{\emph{E.g}~}
+\newcommand\ie{\emph{i.e}~} 
+\newcommand\Ie{\emph{I.e}~}
+\newcommand\cf{\emph{c.f}~} 
+\newcommand\Cf{\emph{C.f}~}
+\newcommand\etc{\emph{etc}~} 
+\newcommand\vsu{\emph{vs}~}
+\newcommand\wrt{w.r.t~} 
+\newcommand\dof{d.o.f~}
+\newcommand\etal{\emph{et al}~}
+
+%argmin and argmax
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+
+
+% Comments with highlights
+\newcommand{\red}[1]{\textcolor[rgb]{1.00, 0.00, 0.00}{{#1}}} % comments in red
+\newcommand{\green}[1]{\textcolor[rgb]{0.00, 1.00, 0.00}{{#1}}} % comments in green
+\newcommand{\blue}[1]{\textcolor[rgb]{0.00, 0.00, 1.00}{{#1}}} % comments in blue
+\newcommand{\black}[1]{\textcolor[rgb]{0.00, 0.00, 0.00}{{#1}}} % comments in black
+
+
+%-> Math functions
+%-
+%- International standard layout rules (from isomath package)
+%- The overall rule is that symbols representing math quantities or variables should
+%- be italicised, symbols representing units or labels are unitalicised (roman).
+%- Symbols for vectors and matrices are bold italic, symbols for tensors are 
+%- sans-serif bold italic.
+%- The above rules apply equally to letter symbols from the Greek and 
+%- the Latin alphabet.
+%- More information may be found in <<The LaTeX Mathematics Companion>>
+%- However, math typefaces vary from field to field. To keep consistent typography
+%- and easy adaption, it it always best to create a corresponding command for 
+%- variables in each math category.  
+
+%%Variable style
+\newcommand{\vect}[1]{{\boldsymbol{#1}}} %%Vector in bold italic
+\newcommand{\matx}[1]{{\boldsymbol{#1}}} %%Matrix in bold italic
+\newcommand{\unitmt}[1]{\boldsymbol{\mathbf{#1}}} %%Identity matrix in bold roman
+\newcommand{\tens}[1]{\boldsymbol{\mathsf{#1}}} %%Tensor in sans-serif bold italic
+\newcommand{\unitts}[1]{\boldsymbol{\mathsf{#1}}}%%Identity tensor in sans-serif bold
+\newcommand{\set}[1]{{\mathbb{#1}}}			%set notation
+\newcommand{\opt}[1]{{\mathcal{#1}}}		%operator noation
+\providecommand{\unit}[1]{\,\mathrm{#1}}% units in roman
+\providecommand{\const}[1]{\mathrm{#1}}% math constants, functions
+\providecommand{\desc}[1]{\mathrm{#1}}% descriptive superscripts and subscripts in roman type 
+\providecommand{\div}{\operatorname{div}}% divergence operator
+\providecommand{\order}{\operatorname{O}}% order operator
+\providecommand{\trace}{\operatorname{tr}}% trace operator
+\providecommand{\diag}{\operatorname{diag}}% diagonal
+\providecommand{\def}{\operatorname{def}}% define
+
+%%Variable abbreviations (vectors)
+\newcommand{\va}{\vect{a}}
+\newcommand{\vb}{\vect{b}}
+\newcommand{\vc}{\vect{c}}
+\newcommand{\vd}{\vect{d}}
+\newcommand{\ve}{\vect{e}}
+\newcommand{\vf}{\vect{f}}
+\newcommand{\vg}{\vect{g}}
+\newcommand{\vh}{\vect{h}}
+\newcommand{\vi}{\vect{i}}
+\newcommand{\vj}{\vect{j}}
+\newcommand{\vk}{\vect{k}}
+\newcommand{\vl}{\vect{l}}
+\newcommand{\vell}{\vect{\ell}}
+\newcommand{\vm}{\vect{m}}
+\newcommand{\vn}{\vect{n}}
+\newcommand{\vo}{\vect{o}}
+\newcommand{\vp}{\vect{p}}
+\newcommand{\vq}{\vect{q}}
+\newcommand{\vr}{\vect{r}}
+\newcommand{\vs}{\vect{s}}
+\newcommand{\vt}{\vect{t}}
+\newcommand{\vu}{\vect{u}}
+\newcommand{\vv}{\vect{v}}
+\newcommand{\vw}{\vect{w}}
+\newcommand{\vx}{\vect{x}}
+\newcommand{\vy}{\vect{y}}
+\newcommand{\vz}{\vect{z}}
+\newcommand{\valpha}{\vect{\alpha}}
+\newcommand{\vbeta}{\vect{\beta}}
+\newcommand{\vgamma}{\vect{\gamma}}
+\newcommand{\vomega}{\vect{\omega}}
+\newcommand{\vphi}{\vect{\phi}}
+\newcommand{\vpsi}{\vect{\psi}}
+\newcommand{\vtheta}{\vect{\theta}}
+\newcommand{\vmu}{\vect{\mu}} 
+\newcommand{\vepsilon}{\vect{\epsilon}}
+
+%%Variable abbreviations (matrices)
+\newcommand{\mA}{\matx{A}}
+\newcommand{\mB}{\matx{B}}
+\newcommand{\mC}{\matx{C}}
+\newcommand{\mD}{\matx{D}}
+\newcommand{\mE}{\matx{E}}
+\newcommand{\mF}{\matx{F}}
+\newcommand{\mG}{\matx{G}}
+\newcommand{\mH}{\matx{H}}
+\newcommand{\mI}{\matx{I}}
+\newcommand{\mJ}{\matx{J}}
+\newcommand{\mK}{\matx{K}}
+\newcommand{\mL}{\matx{L}}
+\newcommand{\mM}{\matx{M}}
+\newcommand{\mN}{\matx{N}}
+\newcommand{\mO}{\matx{O}}
+\newcommand{\mP}{\matx{P}}
+\newcommand{\mQ}{\matx{Q}}
+\newcommand{\mR}{\matx{R}}
+\newcommand{\mS}{\matx{S}}
+\newcommand{\mT}{\matx{T}}
+\newcommand{\mU}{\matx{U}}
+\newcommand{\mV}{\matx{V}}
+\newcommand{\mW}{\matx{W}}
+\newcommand{\mX}{\matx{X}}
+\newcommand{\mY}{\matx{Y}}
+\newcommand{\mZ}{\matx{Z}}
+
+
+\newcommand{\mGamma}{\matx{\Gamma}}
+\newcommand{\mTheta}{\matx{\Theta}}
+\newcommand{\mLambda}{\matx{\Lambda}}
+
+%%Variable abbreviations (sets)
+\newcommand{\sA}{\set{A}}
+\newcommand{\sB}{\set{B}}
+\newcommand{\sC}{\set{C}}
+\newcommand{\sD}{\set{D}}
+\newcommand{\sE}{\set{E}}
+\newcommand{\sF}{\set{F}}
+\newcommand{\sG}{\set{G}}
+\newcommand{\sH}{\set{H}}
+\newcommand{\sI}{\set{I}}
+\newcommand{\sJ}{\set{J}}
+\newcommand{\sK}{\set{K}}
+\newcommand{\sL}{\set{L}}
+\newcommand{\sM}{\set{M}}
+\newcommand{\sN}{\set{N}}
+\newcommand{\sO}{\set{O}}
+\newcommand{\sP}{\set{P}}
+\newcommand{\sQ}{\set{Q}}
+\newcommand{\sR}{\set{R}}
+\newcommand{\sS}{\set{S}}
+\newcommand{\sT}{\set{T}}
+\newcommand{\sU}{\set{U}}
+\newcommand{\sV}{\set{V}}
+\newcommand{\sW}{\set{W}}
+\newcommand{\sX}{\set{X}}
+\newcommand{\sY}{\set{Y}}
+\newcommand{\sZ}{\set{Z}}
+
+%%Variable abbreviations (operators)
+\newcommand{\oA}{\opt{A}}
+\newcommand{\oB}{\opt{B}}
+\newcommand{\oC}{\opt{C}}
+\newcommand{\oD}{\opt{D}}
+\newcommand{\oE}{\opt{E}}
+\newcommand{\oF}{\opt{F}}
+\newcommand{\oG}{\opt{G}}
+\newcommand{\oH}{\opt{H}}
+\newcommand{\oI}{\opt{I}}
+\newcommand{\oJ}{\opt{J}}
+\newcommand{\oK}{\opt{K}}
+\newcommand{\oL}{\opt{L}}
+\newcommand{\oM}{\opt{M}}
+\newcommand{\oN}{\opt{N}}
+\newcommand{\oO}{\opt{O}}
+\newcommand{\oP}{\opt{P}}
+\newcommand{\oQ}{\opt{Q}}
+\newcommand{\oR}{\opt{R}}
+\newcommand{\oS}{\opt{S}}
+\newcommand{\oT}{\opt{T}}
+\newcommand{\oU}{\opt{U}}
+\newcommand{\oV}{\opt{V}}
+\newcommand{\oW}{\opt{W}}
+\newcommand{\oX}{\opt{X}}
+\newcommand{\oY}{\opt{Y}}
+\newcommand{\oZ}{\opt{Z}}
+
+
+\newif\ifblackandwhitecycle
+\gdef\patternnumber{0}
+
+\pgfkeys{/tikz/.cd,
+	zoombox paths/.style={
+		draw=orange,
+		very thick
+	},
+	black and white/.is choice,
+	black and white/.default=static,
+	black and white/static/.style={
+		draw=white,
+		zoombox paths/.append style={
+			draw=white,
+			postaction={
+				draw=black,
+				loosely dashed
+			}
+		}
+	},
+	black and white/static/.code={
+		\gdef\patternnumber{1}
+	},
+	black and white/cycle/.code={
+		\blackandwhitecycletrue
+		\gdef\patternnumber{1}
+	},
+	black and white pattern/.is choice,
+	black and white pattern/0/.style={},
+	black and white pattern/1/.style={
+		draw=white,
+		postaction={
+			draw=black,
+			dash pattern=on 1pt off 1pt
+		}
+	},
+	black and white pattern/2/.style={
+		draw=white,
+		postaction={
+			draw=black,
+			dash pattern=on 2pt off 2pt
+		}
+	},
+	black and white pattern/3/.style={
+		draw=white,
+		postaction={
+			draw=black,
+			dash pattern=on 2pt off 2pt on 1pt off 2pt
+		}
+	},
+	black and white pattern/4/.style={
+		draw=white,
+		postaction={
+			draw=black,
+			dash pattern=on 2pt off 1pt on 1 pt off 1pt on 1 pt off 1pt
+		}
+	},
+	zoomboxarray inner gap/.initial=2pt,
+	zoomboxarray columns/.initial=2,
+	zoomboxarray rows/.initial=2,
+	subfigurename/.initial={},
+	figurename/.initial={zoombox},
+	zoomboxarray/.style={
+		execute at begin picture={
+			\begin{scope}[
+				spy using outlines={%
+					zoombox paths,
+					width=\imagewidth / \pgfkeysvalueof{/tikz/zoomboxarray columns} - (\pgfkeysvalueof{/tikz/zoomboxarray columns} - 1) / \pgfkeysvalueof{/tikz/zoomboxarray columns} * \pgfkeysvalueof{/tikz/zoomboxarray inner gap} -\pgflinewidth,
+					height=\imageheight/2 / \pgfkeysvalueof{/tikz/zoomboxarray rows} - (\pgfkeysvalueof{/tikz/zoomboxarray rows} - 1) / \pgfkeysvalueof{/tikz/zoomboxarray rows} * \pgfkeysvalueof{/tikz/zoomboxarray inner gap}-\pgflinewidth,
+					magnification=3,
+					every spy on node/.style={
+						zoombox paths
+					},
+					every spy in node/.style={
+						zoombox paths
+					}
+				}
+				]
+			},
+		execute at end picture={
+    		\end{scope}
+    		% \node at (image.north) [anchor=north,inner sep=0pt] {\subcaptionbox{\label{\pgfkeysvalueof{/tikz/figurename}-image}}{\phantomimage}};
+    		% \node at (zoomboxes container.north) [anchor=north,inner sep=0pt] {\subcaptionbox{\label{\pgfkeysvalueof{/tikz/figurename}-zoom}}{\phantomimage}};
+    		\gdef\patternnumber{0}
+		},
+		spymargin/.initial=0.1em,
+		zoomboxes xshift/.initial=1,
+		zoomboxes right/.code=\pgfkeys{/tikz/zoomboxes xshift=1},
+		zoomboxes left/.code=\pgfkeys{/tikz/zoomboxes xshift=-1},
+		zoomboxes yshift/.initial=0,
+		zoomboxes above/.code={
+			\pgfkeys{/tikz/zoomboxes yshift=1},
+			\pgfkeys{/tikz/zoomboxes xshift=0}
+		},
+		zoomboxes below/.code={
+			\pgfkeys{/tikz/zoomboxes yshift=-1},
+			\pgfkeys{/tikz/zoomboxes xshift=0}
+		},
+		% caption margin/.initial=4ex,
+		caption margin/.initial=1pt,
+	},
+	adjust caption spacing/.code={},
+	image container/.style={
+		inner sep=0pt,
+		at=(image.north),
+		anchor=north,
+		adjust caption spacing
+	},
+	zoomboxes container/.style={
+		inner sep=0pt,
+		at=(image.north),
+		anchor=north,
+		name=zoomboxes container,
+		xshift=\pgfkeysvalueof{/tikz/zoomboxes xshift}*(\imagewidth+\pgfkeysvalueof{/tikz/spymargin}),
+		yshift=\pgfkeysvalueof{/tikz/zoomboxes yshift}*(\imageheight+\pgfkeysvalueof{/tikz/spymargin}+\pgfkeysvalueof{/tikz/caption margin}),
+		adjust caption spacing
+	},
+	calculate dimensions/.code={
+		\pgfpointdiff{\pgfpointanchor{image}{south west} }{\pgfpointanchor{image}{north east} }
+		\pgfgetlastxy{\imagewidth}{\imageheight}
+		\global\let\imagewidth=\imagewidth
+		\global\let\imageheight=\imageheight
+		\gdef\columncount{1}
+		\gdef\rowcount{1}
+		\gdef\zoomboxcount{1}
+	},
+	image node/.style={
+		inner sep=0pt,
+		name=image,
+		anchor=south west,
+		append after command={
+			[calculate dimensions]
+			node [image container,subfigurename=\pgfkeysvalueof{/tikz/figurename}-image] {\phantomimage}
+			node [zoomboxes container,subfigurename=\pgfkeysvalueof{/tikz/figurename}-zoom] {\phantomimage}
+		}
+	},
+	color code/.style={
+		zoombox paths/.append style={draw=#1}
+	},
+	connect zoomboxes/.style={
+		spy connection path={\draw[draw=none,zoombox paths] (tikzspyonnode) -- (tikzspyinnode);}
+	},
+	help grid code/.code={
+		\begin{scope}[
+			x={(image.south east)},
+			y={(image.north west)},
+			font=\footnotesize,
+			help lines,
+			overlay
+			]
+			\foreach \x in {0,1,...,9} {
+				\draw(\x/10,0) -- (\x/10,1);
+				\node [anchor=north] at (\x/10,0) {0.\x};
+			}
+			\foreach \y in {0,1,...,9} {
+				\draw(0,\y/10) -- (1,\y/10);                        \node [anchor=east] at (0,\y/10) {0.\y};
+			}
+		\end{scope}
+	},
+	help grid/.style={
+		append after command={
+			[help grid code]
+		}
+	},
+}
+
+\newcommand\phantomimage{%
+	\phantom{%
+		\rule{\imagewidth}{\imageheight/2}%
+	}%
+}
+\newcommand\zoombox[2][]{
+	\begin{scope}[zoombox paths]
+		\pgfmathsetmacro\xpos{
+			(\columncount-1)*(\imagewidth / \pgfkeysvalueof{/tikz/zoomboxarray columns} + \pgfkeysvalueof{/tikz/zoomboxarray inner gap} / \pgfkeysvalueof{/tikz/zoomboxarray columns} ) + \pgflinewidth
+		}
+		\pgfmathsetmacro\ypos{
+			(\rowcount-1)*( \imageheight / \pgfkeysvalueof{/tikz/zoomboxarray rows} + \pgfkeysvalueof{/tikz/zoomboxarray inner gap} / \pgfkeysvalueof{/tikz/zoomboxarray rows} ) + 0.5*\pgflinewidth
+		}
+		\edef\dospy{\noexpand\spy [
+			#1,
+			zoombox paths/.append style={
+				black and white pattern=\patternnumber
+			},
+			every spy on node/.append style={#1},
+			x=\imagewidth,
+			y=\imageheight
+			] on (#2) in node [anchor=north west] at ($(zoomboxes container.north west)+(\xpos pt,-\ypos pt)$);}
+		\dospy
+		\pgfmathtruncatemacro\pgfmathresult{ifthenelse(\columncount==\pgfkeysvalueof{/tikz/zoomboxarray columns},\rowcount+1,\rowcount)}
+		\global\let\rowcount=\pgfmathresult
+		\pgfmathtruncatemacro\pgfmathresult{ifthenelse(\columncount==\pgfkeysvalueof{/tikz/zoomboxarray columns},1,\columncount+1)}
+		\global\let\columncount=\pgfmathresult
+		\ifblackandwhitecycle
+		\pgfmathtruncatemacro{\newpatternnumber}{\patternnumber+1}
+		\global\edef\patternnumber{\newpatternnumber}
+		\fi
+	\end{scope}
+}
+

@@ -1,0 +1,78 @@
+% !TeX encoding = UTF-8
+% !TeX program = xelatex
+% !TeX spellcheck = <none>
+
+\documentclass[degree=doctor,degree-type=academic,language=chinese]{thuthesis}
+  % 学位 degree:
+  %   doctor | master | bachelor | postdoc
+  % 学位类型 degree-type:
+  %   academic（默认）| professional
+  % 语言 language
+  %   chinese（默认）| english
+  % 字体库 fontset
+  %   windows | mac | fandol | ubuntu
+  % 研究生院建议终版使用 Windows 平台的字体编译
+
+
+% 论文基本配置，加载宏包等全局配置
+\input{setup}
+
+\begin{document}
+
+% 封面
+\maketitle                                                      % Uncomment!
+
+% 学位论文指导小组、公开评阅人和答辩委员会名单
+% \input{data/committee}
+
+% 使用授权的说明
+% \copyrightpage
+% 将签字扫描后授权文件 scan-copyright.pdf 替换原始页面
+\copyrightpage[file=copyright.pdf]                              % Uncomment!
+
+\frontmatter
+\input{data/abstract}                                           % Uncomment!
+
+% 目录
+\tableofcontents                                                % Uncomment!
+
+% 插图和附表清单
+% \listoffiguresandtables  % 插图和附表清单
+\listoffigures           % 插图清单                             % Uncomment!
+\listoftables            % 附表清单                             % Uncomment!
+
+% 符号对照表
+% \input{data/denotation}
+
+% 待办事项表
+% \listoftodos
+
+% 正文部分
+\mainmatter
+\input{data/chap01}                                           % Uncomment!
+\input{data/chap02}                                           % Uncomment!
+\input{data/chap03}                                           % Uncomment!
+\input{data/chap04}                                           % Uncomment!
+
+% 其他部分
+\backmatter
+\input{data/chap_conclusion}                                         % Uncomment!
+
+% 参考文献
+\bibliography{ref/refs}  % 参考文献使用 BibTeX 编译             % Uncomment!
+% \printbibliography       % 参考文献使用 BibLaTeX 编译
+
+% 附录
+% \appendix
+% \input{data/appendix}
+
+% 个人简历、在学期间完成的相关学术成果
+\input{data/resume}                                             % Uncomment!
+
+% 致谢
+\input{data/acknowledgements}                                   % Uncomment!
+
+% % 答辩委员会决议书  
+\input{data/resolution}                                         % Uncomment!
+
+\end{document}
