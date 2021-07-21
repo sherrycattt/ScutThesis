@@ -17,6 +17,8 @@ https://www.overleaf.com/project/60f7f4bd72ab976ab44eedd7
 
 ## 用法
 
+通过命令行工具（如cmd，bash）进入项目所在目录：
+
 ```shell
 make [{all|thesis|spine|doc|clean|cleanall|distclean}]
 ```
