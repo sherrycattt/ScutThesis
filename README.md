@@ -9,6 +9,11 @@
 
 https://www.overleaf.com/project/60f7f4bd72ab976ab44eedd7
 
+### 设置
+
+* Compiler: XeLatex
+* Tex Live Version: 2020
+* Main Document: main.tex
 
 ## 用法
 
