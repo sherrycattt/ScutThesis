@@ -1,0 +1,246 @@
+%%
+%% This is file `dtx-style.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% thuthesis.dtx  (with options: `dtx-style')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2005-2021 by Tsinghua University TUNA Association <tuna@tsinghua.edu.cn>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    https://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008 or later.
+%% 
+%% To produce the documentation run the original source files ending with `.dtx'
+%% through LaTeX.
+%% 
+\newcommand\thu@error[1]{%
+  \ClassError{thuthesis}{#1}{}%
+}
+\newcommand\thu@warning[1]{%
+  \ClassWarning{thuthesis}{#1}%
+}
+\newcommand\thu@patch@error[1]{%
+  \thu@error{Failed to patch command \protect#1}%
+}
+\newcommand\thu@deprecate[2]{%
+  \def\thu@@tmp{#2}%
+  \thu@warning{%
+    The #1 is deprecated%
+    \ifx\thu@@tmp\@empty\else
+      . Use #2 instead%
+    \fi
+  }%
+}
+\@ifl@t@r\fmtversion{2017/04/15}{}{
+  \thu@error{%
+    TeX Live 2017 or later version is required to compile this document%
+  }
+}
+\RequirePackage{iftex}
+\ifXeTeX\else
+  \thu@error{XeLaTeX is required to compile this document}
+\fi
+\InputIfFileExists{thuthesis-pdf-test-config.tex}{}{
+  \InputIfFileExists{thuthesis-log-test-config.tex}{}{}
+}
+\ProvidesPackage{dtx-style}
+\RequirePackage{hypdoc}
+\RequirePackage{ifthen}
+\RequirePackage{fontspec}[2017/01/20]
+\RequirePackage{amsmath}
+\RequirePackage{unicode-math}
+\RequirePackage[UTF8,scheme=chinese]{ctex}
+\RequirePackage[
+  top=2.5cm, bottom=2.5cm,
+  left=4cm, right=2cm,
+  headsep=3mm]{geometry}
+\RequirePackage{hologo}
+\RequirePackage{array,longtable,booktabs}
+\RequirePackage{listings}
+\RequirePackage{fancyhdr}
+\RequirePackage{xcolor}
+\RequirePackage{enumitem}
+\RequirePackage{etoolbox}
+\RequirePackage{metalogo}
+\RequirePackage[tightLists=false]{markdown}
+
+\markdownSetup{
+  renderers = {
+    link = {\href{#2}{#1}},
+  }
+}
+
+\hypersetup{
+  pdflang     = zh-CN,
+  pdftitle    = {ThuThesis：清华大学学位论文模板},
+  pdfauthor   = {清华大学 TUNA 协会},
+  pdfsubject  = {清华大学学位论文模板使用说明},
+  pdfkeywords = {论文模板; 清华大学; 使用说明},
+  pdfdisplaydoctitle = true
+}%
+
+\ifthenelse{\equal{\@nameuse{g__ctex_fontset_tl}}{mac}}{
+  \setmainfont{Palatino}
+  \setsansfont[Scale=MatchLowercase]{Helvetica}
+  \setmonofont[Scale=MatchLowercase]{Menlo}
+}{
+  \setmainfont[
+    Extension      = .otf,
+    UprightFont    = *-regular,
+    BoldFont       = *-bold,
+    ItalicFont     = *-italic,
+    BoldItalicFont = *-bolditalic,
+  ]{texgyrepagella}
+  \setsansfont[
+    Extension      = .otf,
+    UprightFont    = *-regular,
+    BoldFont       = *-bold,
+    ItalicFont     = *-italic,
+    BoldItalicFont = *-bolditalic,
+  ]{texgyreheros}
+  \setmonofont[
+    Extension      = .otf,
+    UprightFont    = *-regular,
+    BoldFont       = *-bold,
+    ItalicFont     = *-italic,
+    BoldItalicFont = *-bolditalic,
+    Scale          = MatchLowercase,
+    Ligatures      = CommonOff,
+  ]{texgyrecursor}
+}
+\unimathsetup{
+  math-style=ISO,
+  bold-style=ISO,
+}
+\DeclareRobustCommand\mathellipsis{\mathinner{\unicodecdots}}
+\IfFontExistsTF{XITSMath-Regular.otf}{
+  \setmathfont[
+    Extension    = .otf,
+    BoldFont     = XITSMath-Bold,
+    StylisticSet = 8,
+  ]{XITSMath-Regular}
+  \setmathfont[range={cal,bfcal},StylisticSet=1]{XITSMath-Regular.otf}
+}{
+  \setmathfont[
+    Extension    = .otf,
+    BoldFont     = *bold,
+    StylisticSet = 8,
+  ]{xits-math}
+  \setmathfont[range={cal,bfcal},StylisticSet=1]{xits-math.otf}
+}
+
+\colorlet{thu@macro}{blue!60!black}
+\colorlet{thu@env}{blue!70!black}
+\colorlet{thu@option}{purple}
+\patchcmd{\PrintMacroName}{\MacroFont}{\MacroFont\bfseries\color{thu@macro}}{}{}
+\patchcmd{\PrintDescribeMacro}{\MacroFont}{\MacroFont\bfseries\color{thu@macro}}{}{}
+\patchcmd{\PrintDescribeEnv}{\MacroFont}{\MacroFont\bfseries\color{thu@env}}{}{}
+\patchcmd{\PrintEnvName}{\MacroFont}{\MacroFont\bfseries\color{thu@env}}{}{}
+
+\def\DescribeOption{%
+  \leavevmode\@bsphack\begingroup\MakePrivateLetters%
+  \Describe@Option}
+\def\Describe@Option#1{\endgroup
+  \marginpar{\raggedleft\PrintDescribeOption{#1}}%
+  \thu@special@index{option}{#1}\@esphack\ignorespaces}
+\def\PrintDescribeOption#1{\strut \MacroFont\bfseries\sffamily\color{thu@option} #1\ }
+\def\thu@special@index#1#2{\@bsphack
+  \begingroup
+    \HD@target
+    \let\HDorg@encapchar\encapchar
+    \edef\encapchar usage{%
+      \HDorg@encapchar hdclindex{\the\c@HD@hypercount}{usage}%
+    }%
+    \index{#2\actualchar{\string\ttfamily\space#2}
+           (#1)\encapchar usage}%
+    \index{#1:\levelchar#2\actualchar
+           {\string\ttfamily\space#2}\encapchar usage}%
+  \endgroup
+  \@esphack}
+
+\lstdefinestyle{lstStyleBase}{%
+   basicstyle=\small\ttfamily,
+   aboveskip=\medskipamount,
+   belowskip=\medskipamount,
+   lineskip=0pt,
+   boxpos=c,
+   showlines=false,
+   extendedchars=true,
+   upquote=true,
+   tabsize=2,
+   showtabs=false,
+   showspaces=false,
+   showstringspaces=false,
+   numbers=none,
+   linewidth=\linewidth,
+   xleftmargin=4pt,
+   xrightmargin=0pt,
+   resetmargins=false,
+   breaklines=true,
+   breakatwhitespace=false,
+   breakindent=0pt,
+   breakautoindent=true,
+   columns=flexible,
+   keepspaces=true,
+   gobble=4,
+   framesep=3pt,
+   rulesep=1pt,
+   framerule=1pt,
+   backgroundcolor=\color{gray!5},
+   stringstyle=\color{green!40!black!100},
+   keywordstyle=\bfseries\color{blue!50!black},
+   commentstyle=\slshape\color{black!60}}
+
+\lstdefinestyle{lstStyleShell}{%
+   style=lstStyleBase,
+   frame=l,
+   rulecolor=\color{purple},
+   language=bash}
+
+\lstdefinestyle{lstStyleLaTeX}{%
+   style=lstStyleBase,
+   frame=l,
+   rulecolor=\color{violet},
+   language=[LaTeX]TeX}
+
+\lstnewenvironment{latex}{\lstset{style=lstStyleLaTeX}}{}
+\lstnewenvironment{shell}{\lstset{style=lstStyleShell}}{}
+
+\setlist{nosep}
+
+\DeclareDocumentCommand{\option}{m}{\textsf{#1}}
+\DeclareDocumentCommand{\env}{m}{\texttt{#1}}
+\DeclareDocumentCommand{\pkg}{s m}{%
+  \textsf{#2}\IfBooleanF#1{\thu@special@index{package}{#2}}}
+\DeclareDocumentCommand{\cls}{s m}{%
+  \textsf{#2}\IfBooleanF#1{\thu@special@index{package}{#2}}}
+\DeclareDocumentCommand{\file}{s m}{%
+  \nolinkurl{#2}\IfBooleanF#1{\thu@special@index{file}{#2}}}
+\newcommand{\myentry}[1]{%
+  \marginpar{\raggedleft\color{purple}\bfseries\strut #1}}
+\newcommand{\note}[2][Note]{{%
+  \color{magenta}{\bfseries #1}\emph{#2}}}
+
+\g@addto@macro\UrlBreaks{%
+  \do0\do1\do2\do3\do4\do5\do6\do7\do8\do9%
+  \do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M
+  \do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z
+  \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m
+  \do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z
+}
+\Urlmuskip=0mu plus 0.1mu
+
+\DeclareDocumentCommand{\githubuser}{m}{\href{https://github.com/#1}{@#1}}
+
+\def\thuthesis{\textsc{Thu}\-\textsc{Thesis}}
+\endinput
+%%
+%% End of file `dtx-style.sty'.
