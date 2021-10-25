@@ -7,7 +7,7 @@
 
 ## 用法1：Overleaf在线编辑
 
-Overleaf链接：https://www.overleaf.com/project/60f7f4bd72ab976ab44eedd7
+Overleaf链接：https://www.overleaf.com/read/mqnkzqhpwdbk
 
 点击menu，然后点击Copy Project将该项目变成自己的项目，就可以编辑啦~
 
