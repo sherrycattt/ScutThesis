@@ -1,8 +1,8 @@
-# Thu2ScutThesis
+# ScutThesis
+​  By [Sherry Liang](mailto:cssherryliang@gmail.com)
 
 本项目为**华南理工大学博士学位论文LaTeX 模板**，从清华大学学位论文 LaTeX 模板 `thuthesis-v7.2.1`修改而来。详细使用方法请参考原模板相关说明：[ThuThesis](https://github.com/tuna/thuthesis)
 
-​                                                                                                                                                             ——[Sherry Liang](mailto:cssherryliang@gmail.com)
 
 
 ## 用法1：Overleaf在线编辑
